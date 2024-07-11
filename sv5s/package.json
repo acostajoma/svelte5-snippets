@@ -1,8 +1,9 @@
 {
   "name": "sv5s",
   "author": "Jose Martin Acosta Rodriguez",
+  "publisher": "macosta",
   "displayName": "svelte5snippets",
-  "description": "Svelte 5 and kit snippets",
+  "description": "A collection of useful snippets for Svelte development, including support for JavaScript, TypeScript, and Svelte templates.",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.91.0"
@@ -13,9 +14,21 @@
   "contributes": {
     "snippets": [
       {
+        "language": "javascript",
+        "path": "./snippets/snippets.code-snippets"
+      },
+      {
+        "language": "typescript",
+        "path": "./snippets/snippets.code-snippets"
+      },
+      {
         "language": "svelte",
         "path": "./snippets/snippets.code-snippets"
       }
     ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/acostajoma/svelte5-snippets"
   }
 }
