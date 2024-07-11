@@ -1,65 +1,483 @@
-# sv5s README
+### README.md
 
-This is the README for your extension "sv5s". After writing up a brief description, we recommend including the following sections.
+````markdown
+# Svelte Snippets Extension for VSCode
 
-## Features
+A collection of useful snippets for Svelte development, including support for JavaScript, TypeScript, and Svelte templates.
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+## Installation
 
-For example if there is an image subfolder under your extension project workspace:
+1. Open **Visual Studio Code**.
+2. Go to the **Extensions** view by clicking the square icon in the sidebar or pressing `Ctrl+Shift+X`.
+3. Search for `Svelte Snippets Extension`.
+4. Click **Install**.
 
-\!\[feature X\]\(images/feature-x.png\)
+## Snippets
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+### JavaScript and TypeScript Snippets
 
-## Requirements
+#### Svelte State Rune
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+**Prefix**: `svstate`
 
-## Extension Settings
+```javascript
+let state = $state(, .frozen)(initialValue);
+```
+````
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+Creates a state variable with optional `.frozen` modifier.
 
-For example:
+#### Get a Snapshot of Svelte State
 
-This extension contributes the following settings:
+**Prefix**: `svstatesnapshot`
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+```javascript
+$state.snapshot(stateName);
+```
 
-## Known Issues
+Creates a snapshot of a Svelte state variable.
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+#### Compare the Svelte State Value Using .is
 
-## Release Notes
+**Prefix**: `svstateis`
 
-Users appreciate release notes as you update your extension.
+```javascript
+$state.is(stateName, value);
+```
 
-### 1.0.0
+Checks if a state and a second value are the same.
 
-Initial release of ...
+#### Svelte Derived Rune
 
-### 1.0.1
+**Prefix**: `svderived`
 
-Fixed issue #.
+```javascript
+let derivedState = $derived(initialValue);
+```
 
-### 1.1.0
+Uses the Svelte derived rune.
 
-Added features X, Y, and Z.
+#### Svelte Derived Rune with .by Modifier
 
----
+**Prefix**: `svderivedby`
 
-## Working with Markdown
+```javascript
+let derivedState = $derived.by(() => {
+  expression;
+  return derivedStateValue;
+});
+```
 
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
+Uses the Svelte derived rune with `.by` modifier.
 
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
+#### Svelte Effect Rune
 
-## For more information
+**Prefix**: `sveffect`
 
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+```javascript
+$effect(, .pre, .root)(() => {
+    expression
+});
+```
 
-**Enjoy!**
+Creates an effect rune with optional `.pre` and `.root` modifiers.
+
+#### Svelte Effect Tracking Rune
+
+**Prefix**: `sveffecttracking`
+
+```javascript
+$effect.tracking();
+```
+
+Indicates if the code is running inside a tracking context, such as an effect or template.
+
+#### Svelte Bindable Rune
+
+**Prefix**: `svbindable`
+
+```javascript
+$bindable(fallback);
+```
+
+Declares a prop as bindable.
+
+#### Svelte Inspect Rune
+
+**Prefix**: `svinspect`
+
+```javascript
+/**
+ * Will console.log when `variable1,` or `variable2` change.
+ * Note this only works during development
+ * More notes on https://svelte-5-preview.vercel.app/docs/runes#$inspect
+ */
+$inspect(variable1, variable2);
+```
+
+Creates an inspect rune.
+
+#### Svelte Host Rune
+
+**Prefix**: `svhost`
+
+```javascript
+/**
+ * Retrieves the this reference of the custom element that contains this component.
+ * Only available inside custom element components, and only on the client-side.
+ */
+$host();
+```
+
+Gets the `this` reference to the custom component.
+
+#### Svelte Snippet
+
+**Prefix**: `svsnippet`
+
+```javascript
+import type { Snippet } from 'svelte';
+
+{#snippet name(params)}
+    body
+{/snippet}
+
+{@render name(params)}
+```
+
+Creates a Svelte snippet.
+
+#### Svelte Untrack
+
+**Prefix**: `svuntrack`
+
+```javascript
+import { untrack } from "svelte";
+
+// To prevent something from being treated as an $effect/$derived dependency, use untrack
+untrack(() => constantToUntrack);
+```
+
+Prevents something from being treated as an $effect/$derived dependency using `untrack`.
+
+#### Import and Use Svelte on Event
+
+**Prefix**: `svonevent`
+
+```javascript
+import { on } from "svelte/events";
+
+const off = on(element, "event", () => {
+  expression;
+});
+
+// later, if we need to remove the event listener:
+off();
+```
+
+Imports and uses the `on` event handler from Svelte with an example event listener.
+
+#### Structure for Svelte Store
+
+**Prefix**: `svstore`
+
+```javascript
+export function createStoreName(initialValue) {
+  let storeName = $state(initialValue);
+  return {
+    get storeName() {
+      return storeName;
+    },
+    set storeName(value) {
+      storeName = value;
+    },
+  };
+}
+```
+
+Creates a general store function with state management.
+
+### Svelte Page (JavaScript)
+
+**Prefix**: `svpage`
+
+```javascript
+/** @type {import('./$types').Load} */
+export const load = async ({ params }) => {
+  return {
+    // your code here
+  };
+};
+
+/** @type {import('./$types').Actions} */
+export const actions = {
+  default: async ({ params }) => {
+    // your code here
+  },
+};
+```
+
+Creates the server load action and imports its type.
+
+### Svelte Actions (JavaScript)
+
+**Prefix**: `svactions`
+
+```javascript
+/** @type {import('./$types').Actions} */
+export const actions = {
+  default: async ({ params }) => {
+    // your code here
+  },
+};
+// Method is only available in +page.server files
+```
+
+Creates the server action and imports its type only on +page.server files, adding a comment if the method is only available on server pages.
+
+### Svelte Request Event (JavaScript)
+
+**Prefix**: `svrequest`
+
+```javascript
+/** @type {import('./$types').RequestHandler} */
+export const GET = async ({ params }) => {
+  return new Response();
+};
+// Method is only available in +server files
+```
+
+Creates the server action and imports its type.
+
+### Svelte Props (JavaScript)
+
+**Prefix**: `svprops`
+
+```javascript
+/**
+ * @typedef {Object} Props
+ * @property {typedef} param
+ */
+
+/** @type {Props} */
+let { param } = $props();
+```
+
+Creates a props snippet.
+
+### Svelte if Block
+
+**Prefix**: `svif`
+
+```svelte
+{#if condition}
+    // your code here
+{/if}
+```
+
+Creates an if block in Svelte.
+
+### Svelte if-else Block
+
+**Prefix**: `svifelse`
+
+```svelte
+{#if condition}
+    // your code here
+{:else}
+    // your else code here
+{/if}
+```
+
+Creates an if-else block in Svelte.
+
+### Svelte if-elseif-else Block
+
+**Prefix**: `svifelseif`
+
+```svelte
+{#if condition1}
+    // code if condition1 is true
+{:else if condition2}
+    // code if condition2 is true
+{:else}
+    // code if neither condition1 nor condition2 is true
+{/if}
+```
+
+Creates an if-else if-else block in Svelte.
+
+### Svelte @html Block
+
+**Prefix**: `svhtml`
+
+```svelte
+{@html htmlContent}
+```
+
+Uses the `@html` directive in Svelte.
+
+### Svelte @debug Block
+
+**Prefix**: `svdebug`
+
+```svelte
+{@debug variables}
+```
+
+Uses the `@debug` directive in Svelte.
+
+### Svelte @const Block
+
+**Prefix**: `svconst`
+
+```svelte
+{@const variableName = value}
+```
+
+Uses the `@const` directive in Svelte.
+
+### Svelte #key Block
+
+**Prefix**: `svkey`
+
+```svelte
+{#key key}
+    // your code here
+{/key}
+```
+
+Creates a `#key` block in Svelte.
+
+### Svelte #await Block
+
+**Prefix**: `svawait`
+
+```svelte
+{#await promise}
+    // waiting state
+{:then value}
+    // resolved state
+{:catch error}
+    // error state
+{/await}
+```
+
+Creates an `#await` block in Svelte.
+
+### Svelte #each Block
+
+**Prefix**: `sveach`
+
+```svelte
+{#each items as item (key)}
+    // your code here
+{/each}
+```
+
+Creates an `#each` block in Svelte.
+
+### Svelte Page for TypeScript
+
+**Prefix**: `svpagets`
+
+```typescript
+import type { ${TM_FILENAME_BASE/^([a-z])|([lps])|[^a-zA-Z]/${1:/capitalize}${2:/upcase}/g}Load${TM_FILENAME_BASE/^(?!\\+page\\.server$).*|(.*)/${1:+, Actions}/} } from './\\$types';
+
+export const load: ${TM_FILENAME_BASE/^([a-z])|([lps])|[^a-zA-Z]/${1:/capitalize}${2:/upcase}/g}Load = async ({ params }) => {
+    return {
+        // your code here
+    };
+};
+
+${TM_FILENAME_BASE/^(?!\\+page\\.server$).*|(.*)/${1:+export const actions = {
+    default: async ({  }) => {
+        // your code here
+    }
+};}/}
+```
+
+Creates the server load action and imports its type for TypeScript.
+
+### Svelte Actions for TypeScript
+
+**Prefix**: `svactionsts`
+
+```typescript
+${TM_FILENAME_BASE/^(?!\\+page\\.server$).*|(.*)/${1:+import type { Actions } from './$types';
+export const actions = {
+    default: async ({  }) => {
+        // your code here
+    }
+};}${1:?
+:// Method is only available in +page.server files}/}
+```
+
+Creates the server action and imports its type only on +page.server files for TypeScript, adding a comment if the method is only available on server pages.
+
+### Svelte Request Event for TypeScript
+
+**Prefix**: `sv
+
+requestts`
+
+```typescript
+${TM_FILENAME_BASE/^(?!\\+server$).*|(.*)/${1:+import type { RequestHandler } from './$types';
+export const GET: RequestHandler = async ({  }) => {
+    return new Response();
+};}${1:?
+:// Method is only available in +server files}/}
+```
+
+Creates the server action and imports its type for TypeScript.
+
+### Svelte Props for TypeScript
+
+**Prefix**: `svpropsts`
+
+```typescript
+type Props = {
+  param: typedef;
+};
+
+let { param }: Props = $props();
+```
+
+Creates a props snippet for TypeScript.
+
+### Create the Structure of a TS Svelte Page
+
+**Prefix**: `svpagets`
+
+```svelte
+<script lang='ts'>
+    import { type PageData } from './$types';
+    import type { Snippet } from 'svelte';
+
+    type Props = {
+        data: PageData,
+        children: Snippet,
+        newProp: typeDef
+    }
+
+    let {
+        children,
+        data,
+        newProp
+    }: Props = $props();
+</script>
+```
+
+Create the structure of a TypeScript Svelte page.
+
+## Contributing
+
+Feel free to fork this repository, make improvements, and send a pull request. All contributions are welcome!
+
+## License
+
+This extension is licensed under the MIT License.
+
+```
+
+```
