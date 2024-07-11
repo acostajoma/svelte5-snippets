@@ -1,6 +1,3 @@
-### README.md
-
-````markdown
 # Svelte Snippets Extension for VSCode
 
 A collection of useful snippets for Svelte development, including support for JavaScript, TypeScript, and Svelte templates.
@@ -9,7 +6,7 @@ A collection of useful snippets for Svelte development, including support for Ja
 
 1. Open **Visual Studio Code**.
 2. Go to the **Extensions** view by clicking the square icon in the sidebar or pressing `Ctrl+Shift+X`.
-3. Search for `Svelte Snippets Extension`.
+3. Search for `svelte5snippets`.
 4. Click **Install**.
 
 ## Snippets
@@ -23,7 +20,6 @@ A collection of useful snippets for Svelte development, including support for Ja
 ```javascript
 let state = $state(, .frozen)(initialValue);
 ```
-````
 
 Creates a state variable with optional `.frozen` modifier.
 
