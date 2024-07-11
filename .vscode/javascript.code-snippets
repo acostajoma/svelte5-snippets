@@ -1,0 +1,48 @@
+{
+	"Svelte Page": {
+		"scope": "javascript",
+		"prefix": "svpage",
+		"body": [
+			"/** @type {import('./\\$types').${TM_FILENAME_BASE/^([a-z])|([lps])|[^a-zA-Z]/${1:/capitalize}${2:/upcase}/g}Load\\} */",
+            "export const load = async ({ ${1:params} }) => {",
+            "\t",
+            "\treturn {\n\t\t",
+            "\t}",
+            "}\n\n",
+            "${TM_FILENAME_BASE/^(?!\\+page\\.server$).*|(.*)/${1:+\n/** @type {import('./\\$types').Actions\\} */\nexport const actions = {\n\tdefault: async ({  \\}) => {\n\n\t\\}\n\\};}/}$0"
+		],
+		"description": "Creates the server load action and imports it's type."
+	},
+    "Svelte Actions": {
+		"scope": "javascript",
+		"prefix": "svactions",
+		"body": [
+            "${TM_FILENAME_BASE/^(?!\\+page\\.server$).*|(.*)/${1:+\n/** @type {import('./\\$types').Actions\\} */\nexport const actions = {\n\tdefault: async ({  \\}) => {\n\n\t\\}\n\\};}${1:?\n:// Method is only available in +page.server files}/}$0"
+		],
+		"description": "Creates the server action and imports it's type only on +page.server files, if not adds a comment that method is only available on server pages."
+	},
+    "Svelte Request Event": {
+		"scope": "javascript",
+		"prefix": "svrequest",
+		"body": [
+            "${TM_FILENAME_BASE/^(?!\\+server$).*|(.*)/${1:+/** @type {import('./\\$types').RequestHandler\\} */\nexport const GET = async ({  \\}) => {\n\t\n\treturn new Response();\n\\};}${1:?\n:// Method is only available in +server files}/}$0",
+		],
+		"description": "Creates the server action and imports it's type."
+	},
+
+    "Svelte Props": {
+        "scope": "javascript",
+        "prefix": "svprops",
+        "body": [
+          "/**",
+          " * @typedef {Object} Props",
+          " * @property {${2:typedef}} ${1:param}",
+          " */",
+          "\n/** @type {Props} */",
+          "let {",
+          "\t${1:param}",
+          "} = \\$props();\n$0"
+        ],
+        "description": "Creates a props snippet."
+      }
+}
