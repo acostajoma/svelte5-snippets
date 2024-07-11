@@ -1,0 +1,347 @@
+{
+    "Svelte State Rune":{
+        "scope": "typescript,javascript",
+        "prefix": "svstate",
+        "body": [
+            "let ${1:state} = \\$state${2| ,.frozen|}(${3:initialValue});$0"
+        ],
+        "description": "Snippet to create a state variable with optional .frozen modifier"
+    },
+    "Get a snapshot of Svelte State":{
+        "scope": "typescript,javascript,svelte",
+        "prefix": "svstatesnapshot",
+        "body": [
+            "\\$state.snapshot($stateName);$0"
+        ],
+        "description": "Snippet to create a snapshot of a Svelte state variable"
+    },
+    "Compare the Svelte State value using .is":{
+        "scope": "typescript,javascript,svelte",
+        "prefix": "svstateis",
+        "body": [
+            "\\$state.is(${1:stateName}, ${2:value});$0"
+        ],
+        "description": "Check if a state and a second value are the same"
+    },
+    "Svelte Derived Rune":{
+        "scope": "typescript,javascript",
+        "prefix": "svderived",
+        "body": [
+            "let ${1:derivedState} = \\$derived(${2:initialValue});$0"
+        ],
+        "description": "Uses the svelte derived Rune"
+    },
+    "Svelte Derived Rune with .by modifier":{
+        "scope": "typescript,javascript",
+        "prefix": "svderivedby",
+        "body": [
+            "let ${1:derivedState} = \\$derived.by(() => {",
+            "\t${2:expression}",
+            "\t return ${3:derivedStateValue}",
+            "});\n",
+            "$0"
+        ],
+        "description": "Uses the svelte derived Rune"
+    },
+    "Svelte Effect Rune":{
+        "scope": "typescript,javascript",
+        "prefix": "sveffect",
+        "body": [
+            "\\$effect${1| ,.pre,.root|}(() => {",
+            "\t${2:expression}",
+            "});",
+            "$0"
+        ],
+        "description": "Snippet to create a effect rune with optional .pre and .root modifiers"
+    },
+    "Svelte Effect Tracking Rune":{
+        "scope": "typescript,javascript,svelte",
+        "prefix": "sveffecttracking",
+        "body": [
+            "\\$effect.tracking()$0"
+        ],
+        "description": "The $effect.tracking rune is an advanced feature that tells you whether or not the code is running inside a tracking context, such as an effect or inside your template"
+    },
+    "Svelte Bindable Rune":{
+        "scope": "typescript,javascript",
+        "prefix": "svbindable",
+        "body": [
+            "\\$bindable(${1:fallback})$0"
+        ],
+        "description": "Snippet to declare prop as bindable"
+    },
+    "Svelte Inspect Rune":{
+        "scope": "typescript,javascript",
+        "prefix": "svinspect",
+        "body": [
+            "/**\n* Will console.log when `${1:variable1},` or `${2:variable2}` change.\n* Note this only works during development\n* More notes on https://svelte-5-preview.vercel.app/docs/runes#\\$inspect\n*/",
+            "\\$inspect(${1:variable1}, ${2:variable2});\n$0"
+        ],
+        "description": "Snippet to create a inspect rune"
+    },
+    "Svelte Host Rune":{
+        "scope": "typescript,javascript",
+        "prefix": "svhost",
+        "body": [
+            "/**\n* Retrieves the this reference of the custom element that contains this component\n* Only available inside custom element components, and only on the client-side \n*/",
+            "\\$host()$0"
+        ],
+        "description": "Snippet to get this reference to custom component"
+    },
+    "Svelte Snippet":{
+        "scope": "typescript,javascript,svelte",
+        "prefix": "svsnippet",
+        "body": [
+            "import type { Snippet } from 'svelte';\n",
+			"{#snippet ${1:name}(${2:params})}",
+			"\t${3:body}",
+			"{/snippet}",
+            "\n{@render ${1:name}(${2:params})}\n$0"
+        ],
+        "description": "Snippet to create a Svelte Snippet"
+    },
+    "Svelte Untrack":{
+        "scope": "typescript,javascript",
+        "prefix": "svuntrack",
+        "body": [
+            "import { untrack } from 'svelte';\n",
+            "// To prevent something from being treated as an \\$effect/\\$derived dependency, use untrack",
+			"untrack(() => ${1:constantToUntrack} )\n$0"
+        ],
+        "description": "Snippet to create a Svelte Untrack To prevent something from being treated as an $effect/$derived dependency, use untrack"
+    },
+    "Import and Use Svelte on Event": {
+        "scope": "javascript,typescript",
+        "prefix": "svonevent",
+        "body": [
+        "import { on } from 'svelte/events';\n",
+        "const off = on(${1:element}, '${2:event}', () => {",
+        "\t${3:expression}",
+        "});\n",
+        "// later, if we need to remove the event listener:",
+        "off();"
+        ],
+        "description": "Snippet to import and use the 'on' event handler from Svelte with an example event listener."
+    },
+    "Structure for Svelte store": {
+        "scope": "javascript,typescript",
+        "prefix": "svstore",
+        "body": [
+          "export function create${1:storeName}(${2:initialValue}) {",
+          "\tlet ${1/^([A-Z])/${1:/downcase}/} = \\$state(${2:initialValue});",
+          "\treturn {",
+          "\t\tget ${1/^([A-Z])/${1:/downcase}/}() {",
+          "\t\t\treturn ${1/^([A-Z])/${1:/downcase}/};",
+          "\t\t},",
+          "\t\tset ${1/^([A-Z])/${1:/downcase}/}(value) {",
+          "\t\t\t${1/^([A-Z])/${1:/downcase}/} = value;",
+          "\t\t},",
+          "\t};",
+          "}"
+        ],
+        "description": "Snippet to create a general store function with state management."
+      },
+      "Svelte Page": {
+		"scope": "javascript",
+		"prefix": "svpage",
+		"body": [
+			"/** @type {import('./\\$types').${TM_FILENAME_BASE/^([a-z])|([lps])|[^a-zA-Z]/${1:/capitalize}${2:/upcase}/g}Load\\} */",
+            "export const load = async ({ ${1:params} }) => {",
+            "\t",
+            "\treturn {\n\t\t",
+            "\t}",
+            "}\n\n",
+            "${TM_FILENAME_BASE/^(?!\\+page\\.server$).*|(.*)/${1:+\n/** @type {import('./\\$types').Actions\\} */\nexport const actions = {\n\tdefault: async ({  \\}) => {\n\n\t\\}\n\\};}/}$0"
+		],
+		"description": "Creates the server load action and imports it's type."
+	},
+    "Svelte Actions": {
+		"scope": "javascript",
+		"prefix": "svactions",
+		"body": [
+            "${TM_FILENAME_BASE/^(?!\\+page\\.server$).*|(.*)/${1:+\n/** @type {import('./\\$types').Actions\\} */\nexport const actions = {\n\tdefault: async ({  \\}) => {\n\n\t\\}\n\\};}${1:?\n:// Method is only available in +page.server files}/}$0"
+		],
+		"description": "Creates the server action and imports it's type only on +page.server files, if not adds a comment that method is only available on server pages."
+	},
+    "Svelte Request Event": {
+		"scope": "javascript",
+		"prefix": "svrequest",
+		"body": [
+            "${TM_FILENAME_BASE/^(?!\\+server$).*|(.*)/${1:+/** @type {import('./\\$types').RequestHandler\\} */\nexport const GET = async ({  \\}) => {\n\t\n\treturn new Response();\n\\};}${1:?\n:// Method is only available in +server files}/}$0",
+		],
+		"description": "Creates the server action and imports it's type."
+	},
+
+    "Svelte Props": {
+        "scope": "javascript",
+        "prefix": "svprops",
+        "body": [
+          "/**",
+          " * @typedef {Object} Props",
+          " * @property {${2:typedef}} ${1:param}",
+          " */",
+          "\n/** @type {Props} */",
+          "let {",
+          "\t${1:param}",
+          "} = \\$props();\n$0"
+        ],
+        "description": "Creates a props snippet."
+      },
+      "Create the structure of a TS svelte page": {
+		"scope": "svelte",
+		"prefix": "svpagets",
+		"body": [
+			"<script lang='ts'>",
+			"\timport { type PageData } from './\\$types';",
+			"\timport type { Snippet } from 'svelte';\n",
+			"\ttype Props = {",
+			"\t\tdata : PageData",
+			"\t\tchildren : Snippet",
+			"\t\t${1:newProp} : ${2:typeDef}",
+			"\t}",
+			"\tlet { \n\t\tchildren, \n\t\tdata, ${1:newProp} : Props = \\$props()\n\t$0",
+			"</script>"
+		],
+		"description": "Create the structure of a TS svelte page"
+	},
+	"Svelte if block": {
+		"scope": "svelte",
+		"prefix": "svif",
+		"body": [
+		"{#if ${1:condition}}",
+		"\t${2:// your code here}",
+		"{/if}\n$0"
+		],
+		"description": "Snippet to create an if block in Svelte"
+	},
+	"Svelte if-else block": {
+		"scope": "svelte",
+		"prefix": "svifelse",
+		"body": [
+		"{#if ${1:condition}}",
+		"\t${2:// your code here}",
+		"{:else}",
+		"\t${3:// your else code here}",
+		"{/if}\n$0"
+		],
+		"description": "Snippet to create an if-else block in Svelte"
+	},
+	"Svelte if-elseif-else block": {
+		"scope": "svelte",
+		"prefix": "svifelseif",
+		"body": [
+		  "{#if ${1:condition1}}",
+		  "\t${2:// code if condition1 is true}",
+		  "{:else if ${3:condition2}}",
+		  "\t${4:// code if condition2 is true}",
+		  "{:else}",
+		  "\t${5:// code if neither condition1 nor condition2 is true}",
+		  "{/if}\n$0"
+		],
+		"description": "Snippet to create an if-else if-else block in Svelte"
+	  },
+	"Svelte @html block": {
+		"scope": "svelte",
+		"prefix": "svhtml",
+		"body": [
+		"{@html ${1:htmlContent}}$0"
+		],
+		"description": "Snippet to use the @html directive in Svelte"
+	},
+	"Svelte @debug block": {
+		"scope": "svelte",
+		"prefix": "svdebug",
+		"body": [
+		  "{@debug ${1:variables}}$0"
+		],
+		"description": "Snippet to use the @debug directive in Svelte"
+	  },
+	  "Svelte @const block": {
+		"scope": "svelte",
+		"prefix": "svconst",
+		"body": [
+		  "{@const ${1:variableName} = ${2:value}}$0"
+		],
+		"description": "Snippet to use the @const directive in Svelte"
+	  },
+	  "Svelte #key block": {
+		"scope": "svelte",
+		"prefix": "svkey",
+		"body": [
+		  "{#key ${1:key}}",
+		  "\t${2:// your code here}",
+		  "{/key}$0"
+		],
+		"description": "Snippet to create a #key block in Svelte"
+	 },
+	 "Svelte #await block": {
+		"scope": "svelte",
+		"prefix": "svawait",
+		"body": [
+		  "{#await ${1:promise}}",
+		  "\t${2:// waiting state}",
+		  "{:then ${3:value}}",
+		  "\t${4:// resolved state}",
+		  "{:catch ${5:error}}",
+		  "\t${6:// error state}",
+		  "{/await}$0"
+		],
+		"description": "Snippet to create an #await block in Svelte"
+	  },
+	  "Svelte #each block": {
+		"scope": "svelte",
+		"prefix": "sveach",
+		"body": [
+		  "{#each ${1:items} as ${2:item} (${3:key})}",
+		  "\t${4:// your code here}",
+		  "{/each}$0"
+		],
+		"description": "Snippet to create an #each block in Svelte"
+	},
+    "Svelte Page for TS": {
+		"scope": "typescript",
+		"prefix": "svpage",
+		"body": [
+			"import type { ${TM_FILENAME_BASE/^([a-z])|([lps])|[^a-zA-Z]/${1:/capitalize}${2:/upcase}/g}Load${TM_FILENAME_BASE/^(?!\\+page\\.server$).*|(.*)/${1:+, Actions}/} } from './\\$types';",
+            "",
+            "export const load: ${TM_FILENAME_BASE/^([a-z])|([lps])|[^a-zA-Z]/${1:/capitalize}${2:/upcase}/g}Load = async ({ $1 }) => {",
+            "\t",
+            "\treturn {\n\t\t",
+            "\t}",
+            "}\n\n",
+            "${TM_FILENAME_BASE/^(?!\\+page\\.server$).*|(.*)/${1:+export const actions = {\n\tdefault: async ({  \\}) => {\n\n\t\\}\n\\} satisfies Actions;}/}",
+		],
+		"description": "Creates the server load action and imports it's type."
+	},
+    "Svelte Actions for TS": {
+		"scope": "typescript",
+		"prefix": "svactions",
+		"body": [
+            "${TM_FILENAME_BASE/^(?!\\+page\\.server$).*|(.*)/${1:+import type { Actions \\} from './$types';\n\nexport const actions = {\n\tdefault: async ({  \\}) => {\n\n\t\\}\n\\} satisfies Actions;}${1:?\n:// Method is only available in +page.server files}/}",
+		],
+		"description": "Creates the server action and imports it's type only on +page.server files, if not adds a comment that method is only available on server pages."
+	},
+    "Svelte Request Event for TS": {
+		"scope": "typescript",
+		"prefix": "svrequest",
+		"body": [
+            "${TM_FILENAME_BASE/^(?!\\+server$).*|(.*)/${1:+import type { RequestHandler \\} from './$types';\n\nexport const GET: RequestHandler = async ({  \\}) => {\n\t\n\treturn new Response();\n\\};}${1:?\n:// Method is only available in +server files}/}",
+		],
+		"description": "Creates the server action and imports it's type."
+	},
+
+    "Svelte Props for TS": {
+		"scope": "typescript",
+		"prefix": "svprops",
+		"body": [
+            "type Props = {",
+            "\t${1:param} : ${2:typedef}",
+            "}",
+            "\nlet {",
+            "\t${1:param}",
+            "} : Props = \\$props();\n\n$0"
+
+		],
+		"description": "Creates a props snippet."
+	},
+}

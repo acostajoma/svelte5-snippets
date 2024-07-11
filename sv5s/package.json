@@ -1,0 +1,21 @@
+{
+  "name": "sv5s",
+  "author": "Jose Martin Acosta Rodriguez",
+  "displayName": "svelte5snippets",
+  "description": "Svelte 5 and kit snippets",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.91.0"
+  },
+  "categories": [
+    "Snippets"
+  ],
+  "contributes": {
+    "snippets": [
+      {
+        "language": "svelte",
+        "path": "./snippets/snippets.code-snippets"
+      }
+    ]
+  }
+}
