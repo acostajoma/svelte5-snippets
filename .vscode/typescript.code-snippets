@@ -4,45 +4,44 @@
 		"prefix": "svpage",
 		"body": [
 			"import type { ${TM_FILENAME_BASE/^([a-z])|([lps])|[^a-zA-Z]/${1:/capitalize}${2:/upcase}/g}Load${TM_FILENAME_BASE/^(?!\\+page\\.server$).*|(.*)/${1:+, Actions}/} } from './\\$types';",
-            "",
-            "export const load: ${TM_FILENAME_BASE/^([a-z])|([lps])|[^a-zA-Z]/${1:/capitalize}${2:/upcase}/g}Load = async ({ $1 }) => {",
-            "\t",
-            "\treturn {\n\t\t",
-            "\t}",
-            "}\n\n",
-            "${TM_FILENAME_BASE/^(?!\\+page\\.server$).*|(.*)/${1:+export const actions = {\n\tdefault: async ({  \\}) => {\n\n\t\\}\n\\} satisfies Actions;}/}",
+			"",
+			"export const load: ${TM_FILENAME_BASE/^([a-z])|([lps])|[^a-zA-Z]/${1:/capitalize}${2:/upcase}/g}Load = async ({ $1 }) => {",
+			"\t",
+			"\treturn {\n\t\t",
+			"\t}",
+			"}\n\n",
+			"${TM_FILENAME_BASE/^(?!\\+page\\.server$).*|(.*)/${1:+export const actions = {\n\tdefault: async ({  \\}) => {\n\n\t\\}\n\\} satisfies Actions;}/}",
 		],
-		"description": "Creates the server load action and imports it's type."
+		"description": "Creates the server load action and imports it's type.",
 	},
-    "Svelte Actions": {
+	"Svelte Actions": {
 		"scope": "typescript",
 		"prefix": "svactions",
 		"body": [
-            "${TM_FILENAME_BASE/^(?!\\+page\\.server$).*|(.*)/${1:+import type { Actions \\} from './$types';\n\nexport const actions = {\n\tdefault: async ({  \\}) => {\n\n\t\\}\n\\} satisfies Actions;}${1:?\n:// Method is only available in +page.server files}/}",
+			"${TM_FILENAME_BASE/^(?!\\+page\\.server$).*|(.*)/${1:+import type { Actions \\} from './$types';\n\nexport const actions = {\n\tdefault: async ({  \\}) => {\n\n\t\\}\n\\} satisfies Actions;}${1:?\n:// Method is only available in +page.server files}/}",
 		],
-		"description": "Creates the server action and imports it's type only on +page.server files, if not adds a comment that method is only available on server pages."
+		"description": "Creates the server action and imports it's type only on +page.server files, if not adds a comment that method is only available on server pages.",
 	},
-    "Svelte Request Event": {
+	"Svelte Request Event": {
 		"scope": "typescript",
 		"prefix": "svrequest",
 		"body": [
-            "${TM_FILENAME_BASE/^(?!\\+server$).*|(.*)/${1:+import type { RequestHandler \\} from './$types';\n\nexport const GET: RequestHandler = async ({  \\}) => {\n\t\n\treturn new Response();\n\\};}${1:?\n:// Method is only available in +server files}/}",
+			"${TM_FILENAME_BASE/^(?!\\+server$).*|(.*)/${1:+import type { RequestHandler \\} from './$types';\n\nexport const GET: RequestHandler = async ({  \\}) => {\n\t\n\treturn new Response();\n\\};}${1:?\n:// Method is only available in +server files}/}",
 		],
-		"description": "Creates the server action and imports it's type."
+		"description": "Creates the server action and imports it's type.",
 	},
 
-    "Svelte Props": {
+	"Svelte Props": {
 		"scope": "typescript",
 		"prefix": "svprops",
 		"body": [
-            "type Props = {",
-            "\t${1:param} : ${2:typedef}",
-            "}",
-            "\nlet {",
-            "\t${1:param}",
-            "} : Props = \\$props();\n\n$0"
-
+			"type Props = {",
+			"\t${1:param} : ${2:typedef}",
+			"}",
+			"\nlet {",
+			"\t${1:param}",
+			"} : Props = \\$props();\n\n$0",
 		],
-		"description": "Creates a props snippet."
+		"description": "Creates a props snippet.",
 	},
 }

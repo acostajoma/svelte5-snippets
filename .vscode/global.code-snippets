@@ -1,144 +1,127 @@
 {
-    "Svelte State Rune":{
-        "scope": "typescript,javascript",
-        "prefix": "svstate",
-        "body": [
-            "let ${1:state} = \\$state${2| ,.frozen|}(${3:initialValue});$0"
-        ],
-        "description": "Snippet to create a state variable with optional .frozen modifier"
-    },
-    "Get a snapshot of Svelte State":{
-        "scope": "typescript,javascript,svelte",
-        "prefix": "svstatesnapshot",
-        "body": [
-            "\\$state.snapshot($stateName);$0"
-        ],
-        "description": "Snippet to create a snapshot of a Svelte state variable"
-    },
-    "Compare the Svelte State value using .is":{
-        "scope": "typescript,javascript,svelte",
-        "prefix": "svstateis",
-        "body": [
-            "\\$state.is(${1:stateName}, ${2:value});$0"
-        ],
-        "description": "Check if a state and a second value are the same"
-    },
-    "Svelte Derived Rune":{
-        "scope": "typescript,javascript",
-        "prefix": "svderived",
-        "body": [
-            "let ${1:derivedState} = \\$derived(${2:initialValue});$0"
-        ],
-        "description": "Uses the svelte derived Rune"
-    },
-    "Svelte Derived Rune with .by modifier":{
-        "scope": "typescript,javascript",
-        "prefix": "svderivedby",
-        "body": [
-            "let ${1:derivedState} = \\$derived.by(() => {",
-            "\t${2:expression}",
-            "\t return ${3:derivedStateValue}",
-            "});\n",
-            "$0"
-        ],
-        "description": "Uses the svelte derived Rune"
-    },
-    "Svelte Effect Rune":{
-        "scope": "typescript,javascript",
-        "prefix": "sveffect",
-        "body": [
-            "\\$effect${1| ,.pre,.root|}(() => {",
-            "\t${2:expression}",
-            "});",
-            "$0"
-        ],
-        "description": "Snippet to create a effect rune with optional .pre and .root modifiers"
-    },
-    "Svelte Effect Tracking Rune":{
-        "scope": "typescript,javascript,svelte",
-        "prefix": "sveffecttracking",
-        "body": [
-            "\\$effect.tracking()$0"
-        ],
-        "description": "The $effect.tracking rune is an advanced feature that tells you whether or not the code is running inside a tracking context, such as an effect or inside your template"
-    },
-    "Svelte Bindable Rune":{
-        "scope": "typescript,javascript",
-        "prefix": "svbindable",
-        "body": [
-            "\\$bindable(${1:fallback})$0"
-        ],
-        "description": "Snippet to declare prop as bindable"
-    },
-    "Svelte Inspect Rune":{
-        "scope": "typescript,javascript",
-        "prefix": "svinspect",
-        "body": [
-            "/**\n* Will console.log when `${1:variable1},` or `${2:variable2}` change.\n* Note this only works during development\n* More notes on https://svelte-5-preview.vercel.app/docs/runes#\\$inspect\n*/",
-            "\\$inspect(${1:variable1}, ${2:variable2});\n$0"
-        ],
-        "description": "Snippet to create a inspect rune"
-    },
-    "Svelte Host Rune":{
-        "scope": "typescript,javascript",
-        "prefix": "svhost",
-        "body": [
-            "/**\n* Retrieves the this reference of the custom element that contains this component\n* Only available inside custom element components, and only on the client-side \n*/",
-            "\\$host()$0"
-        ],
-        "description": "Snippet to get this reference to custom component"
-    },
-    "Svelte Snippet":{
-        "scope": "typescript,javascript,svelte",
-        "prefix": "svsnippet",
-        "body": [
-            "import type { Snippet } from 'svelte';\n",
+	"Svelte State Rune": {
+		"scope": "typescript,javascript",
+		"prefix": "svstate",
+		"body": ["let ${1:state} = \\$state${2| ,.frozen|}(${3:initialValue});$0"],
+		"description": "Snippet to create a state variable with optional .frozen modifier",
+	},
+	"Get a snapshot of Svelte State": {
+		"scope": "typescript,javascript,svelte",
+		"prefix": "svstatesnapshot",
+		"body": ["\\$state.snapshot($stateName);$0"],
+		"description": "Snippet to create a snapshot of a Svelte state variable",
+	},
+	"Compare the Svelte State value using .is": {
+		"scope": "typescript,javascript,svelte",
+		"prefix": "svstateis",
+		"body": ["\\$state.is(${1:stateName}, ${2:value});$0"],
+		"description": "Check if a state and a second value are the same",
+	},
+	"Svelte Derived Rune": {
+		"scope": "typescript,javascript",
+		"prefix": "svderived",
+		"body": ["let ${1:derivedState} = \\$derived(${2:initialValue});$0"],
+		"description": "Uses the svelte derived Rune",
+	},
+	"Svelte Derived Rune with .by modifier": {
+		"scope": "typescript,javascript",
+		"prefix": "svderivedby",
+		"body": [
+			"let ${1:derivedState} = \\$derived.by(() => {",
+			"\t${2:expression}",
+			"\t return ${3:derivedStateValue}",
+			"});\n",
+			"$0",
+		],
+		"description": "Uses the svelte derived Rune",
+	},
+	"Svelte Effect Rune": {
+		"scope": "typescript,javascript",
+		"prefix": "sveffect",
+		"body": ["\\$effect${1| ,.pre,.root|}(() => {", "\t${2:expression}", "});", "$0"],
+		"description": "Snippet to create a effect rune with optional .pre and .root modifiers",
+	},
+	"Svelte Effect Tracking Rune": {
+		"scope": "typescript,javascript,svelte",
+		"prefix": "sveffecttracking",
+		"body": ["\\$effect.tracking()$0"],
+		"description": "The $effect.tracking rune is an advanced feature that tells you whether or not the code is running inside a tracking context, such as an effect or inside your template",
+	},
+	"Svelte Bindable Rune": {
+		"scope": "typescript,javascript",
+		"prefix": "svbindable",
+		"body": ["\\$bindable(${1:fallback})$0"],
+		"description": "Snippet to declare prop as bindable",
+	},
+	"Svelte Inspect Rune": {
+		"scope": "typescript,javascript",
+		"prefix": "svinspect",
+		"body": [
+			"/**\n* Will console.log when `${1:variable1},` or `${2:variable2}` change.\n* Note this only works during development\n* More notes on https://svelte-5-preview.vercel.app/docs/runes#\\$inspect\n*/",
+			"\\$inspect(${1:variable1}, ${2:variable2});\n$0",
+		],
+		"description": "Snippet to create a inspect rune",
+	},
+	"Svelte Host Rune": {
+		"scope": "typescript,javascript",
+		"prefix": "svhost",
+		"body": [
+			"/**\n* Retrieves the this reference of the custom element that contains this component\n* Only available inside custom element components, and only on the client-side \n*/",
+			"\\$host()$0",
+		],
+		"description": "Snippet to get this reference to custom component",
+	},
+	"Svelte Snippet": {
+		"scope": "typescript,javascript,svelte",
+		"prefix": "svsnippet",
+		"body": [
+			"import type { Snippet } from 'svelte';\n",
 			"{#snippet ${1:name}(${2:params})}",
 			"\t${3:body}",
 			"{/snippet}",
-            "\n{@render ${1:name}(${2:params})}\n$0"
-        ],
-        "description": "Snippet to create a Svelte Snippet"
-    },
-    "Svelte Untrack":{
-        "scope": "typescript,javascript",
-        "prefix": "svuntrack",
-        "body": [
-            "import { untrack } from 'svelte';\n",
-            "// To prevent something from being treated as an \\$effect/\\$derived dependency, use untrack",
-			"untrack(() => ${1:constantToUntrack} )\n$0"
-        ],
-        "description": "Snippet to create a Svelte Untrack To prevent something from being treated as an $effect/$derived dependency, use untrack"
-    },
-    "Import and Use Svelte on Event": {
-        "scope": "javascript,typescript",
-        "prefix": "svonevent",
-        "body": [
-        "import { on } from 'svelte/events';\n",
-        "const off = on(${1:element}, '${2:event}', () => {",
-        "\t${3:expression}",
-        "});\n",
-        "// later, if we need to remove the event listener:",
-        "off();"
-        ],
-        "description": "Snippet to import and use the 'on' event handler from Svelte with an example event listener."
-    },
-    "Structure for Svelte store": {
-        "scope": "javascript,typescript",
-        "prefix": "svstore",
-        "body": [
-          "export function create${1:storeName}(${2:initialValue}) {",
-          "\tlet ${1/^([A-Z])/${1:/downcase}/} = \\$state(${2:initialValue});",
-          "\treturn {",
-          "\t\tget ${1/^([A-Z])/${1:/downcase}/}() {",
-          "\t\t\treturn ${1/^([A-Z])/${1:/downcase}/};",
-          "\t\t},",
-          "\t\tset ${1/^([A-Z])/${1:/downcase}/}(value) {",
-          "\t\t\t${1/^([A-Z])/${1:/downcase}/} = value;",
-          "\t\t},",
-          "\t};",
-          "}"
-        ],
-        "description": "Snippet to create a general store function with state management."
-      }
+			"\n{@render ${1:name}(${2:params})}\n$0",
+		],
+		"description": "Snippet to create a Svelte Snippet",
+	},
+	"Svelte Untrack": {
+		"scope": "typescript,javascript",
+		"prefix": "svuntrack",
+		"body": [
+			"import { untrack } from 'svelte';\n",
+			"// To prevent something from being treated as an \\$effect/\\$derived dependency, use untrack",
+			"untrack(() => ${1:constantToUntrack} )\n$0",
+		],
+		"description": "Snippet to create a Svelte Untrack To prevent something from being treated as an $effect/$derived dependency, use untrack",
+	},
+	"Import and Use Svelte on Event": {
+		"scope": "javascript,typescript",
+		"prefix": "svonevent",
+		"body": [
+			"import { on } from 'svelte/events';\n",
+			"const off = on(${1:element}, '${2:event}', () => {",
+			"\t${3:expression}",
+			"});\n",
+			"// later, if we need to remove the event listener:",
+			"off();",
+		],
+		"description": "Snippet to import and use the 'on' event handler from Svelte with an example event listener.",
+	},
+	"Structure for Svelte store": {
+		"scope": "javascript,typescript",
+		"prefix": "svstore",
+		"body": [
+			"export function create${1:storeName}(${2:initialValue}) {",
+			"\tlet ${1/^([A-Z])/${1:/downcase}/} = \\$state(${2:initialValue});",
+			"\treturn {",
+			"\t\tget ${1/^([A-Z])/${1:/downcase}/}() {",
+			"\t\t\treturn ${1/^([A-Z])/${1:/downcase}/};",
+			"\t\t},",
+			"\t\tset ${1/^([A-Z])/${1:/downcase}/}(value) {",
+			"\t\t\t${1/^([A-Z])/${1:/downcase}/} = value;",
+			"\t\t},",
+			"\t};",
+			"}",
+		],
+		"description": "Snippet to create a general store function with state management.",
+	},
 }
