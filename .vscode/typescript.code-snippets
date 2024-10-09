@@ -44,4 +44,21 @@
 		],
 		"description": "Creates a props snippet.",
 	},
+
+	"Svelte Children": {
+		"scope": "typescript",
+		"prefix": "svchildren",
+		"body": [
+			"import type { Snippet } from 'svelte';",
+			"",
+			"type Props = {",
+			"\tchildren: Snippet",
+			"}",
+			"",
+			"let {",
+			"\tchildren",
+			"} : Props = \\$props();\n\n$0",
+		],
+		"description": "Creates a props snippet.",
+	},
 }

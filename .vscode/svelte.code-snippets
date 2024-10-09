@@ -34,11 +34,7 @@
 	"Svelte if block": {
 		"scope": "svelte",
 		"prefix": "svif",
-		"body": [
-			"{#if ${1:condition}}",
-			"\t${2:// your code here}",
-			"{/if}\n$0"
-		],
+		"body": ["{#if ${1:condition}}", "\t${2:// your code here}", "{/if}\n$0"],
 		"description": "Snippet to create an if block in Svelte",
 	},
 	"Svelte if-else block": {
@@ -70,35 +66,25 @@
 	"Svelte @html block": {
 		"scope": "svelte",
 		"prefix": "svhtml",
-		"body": [
-			"{@html ${1:htmlContent}}$0"
-		],
+		"body": ["{@html ${1:htmlContent}}$0"],
 		"description": "Snippet to use the @html directive in Svelte",
 	},
 	"Svelte @debug block": {
 		"scope": "svelte",
 		"prefix": "svdebug",
-		"body": [
-			"{@debug ${1:variables}}$0"
-		],
+		"body": ["{@debug ${1:variables}}$0"],
 		"description": "Snippet to use the @debug directive in Svelte",
 	},
 	"Svelte @const block": {
 		"scope": "svelte",
 		"prefix": "svconst",
-		"body": [
-			"{@const ${1:variableName} = ${2:value}}$0"
-		],
+		"body": ["{@const ${1:variableName} = ${2:value}}$0"],
 		"description": "Snippet to use the @const directive in Svelte",
 	},
 	"Svelte #key block": {
 		"scope": "svelte",
 		"prefix": "svkey",
-		"body": [
-			"{#key ${1:key}}",
-			"\t${2:// your code here}",
-			"{/key}$0"
-		],
+		"body": ["{#key ${1:key}}", "\t${2:// your code here}", "{/key}$0"],
 		"description": "Snippet to create a #key block in Svelte",
 	},
 	"Svelte #await block": {
@@ -118,11 +104,41 @@
 	"Svelte #each block": {
 		"scope": "svelte",
 		"prefix": "sveach",
-		"body": [
-			"{#each ${1:items} as ${2:item} (${3:key})}",
-			"\t${4:// your code here}",
-			"{/each}$0"
-		],
+		"body": ["{#each ${1:items} as ${2:item} (${3:key})}", "\t${4:// your code here}", "{/each}$0"],
 		"description": "Snippet to create an #each block in Svelte",
+	},
+	"Create markdown description of component": {
+		"scope": "svelte",
+		"prefix": "svcomponentmarkdown",
+		"body": [
+			"<!-- @component",
+			"${1:description}",
+			"Example:",
+			"```svelte",
+			"${2:code_example}",
+			"```",
+			"-->",
+		],
+		"description": "Snippet to create a general store function with state management.",
+	},
+
+	"Svelte children": {
+		"scope": "svelte",
+		"prefix": "svchildren",
+		"body": [
+			"<script lang=\"ts\">",
+			"\timport type { Snippet } from 'svelte';",
+			"",
+			"\ttype Props = {",
+			"\tchildren: Snippet;",
+			"\t};",
+			"",
+			"\tlet { children }: Props = \\$props();",
+			"</script>",
+			"",
+			"{@render children()}"
+
+		],
+		"description": "Snippet to create a general store function with state management.",
 	},
 }
